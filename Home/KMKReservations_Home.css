@@ -1,0 +1,405 @@
+/* Fonts (from Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Poppins:wght@400;500;600&display=swap');
+
+/* General page styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background-color: #001F3C;
+    color: #FFFFFF;
+}
+
+/*Navigation Bar (same as the My Profile page)*/
+.site-nav {
+    background: #0D1F5C;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand img {
+    height: 70px;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    color: #A0AEC0;
+}
+
+.nav-links a.active {
+    border-bottom-color: #2388F5;
+}
+
+/* headings use Oswald, like the video */
+h1, h2, h3 {
+    font-family: "Oswald", Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* headings */
+h1, h2, h3 {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.info{
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 60px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+
+    .services-section {
+        padding: 40px 10px;
+    }
+
+    .services-heading h1 {
+        font-size: 26px;
+    }
+
+    .service-card {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .footer-links {
+        align-items: center;
+    }
+}
+
+/*SERVICES SECTION */
+.services-section {
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 60px 20px;
+}
+
+
+.services-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.services-heading h1 {
+    color: #FFFFFF;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.services-heading p {
+    color: #A0AEC0;
+    font-size: 16px;
+}
+
+/* CONTAINER*/
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* SERVICE CARD*/
+.service-card {
+    width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    color: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    transition: 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/*RESTAURANT CARD*/
+.restaurant-card {
+    background-color: #883DDB;
+}
+
+.restaurant-card .service-image {
+    background-color: #A855F7;
+}
+
+.restaurant-card .explore-btn {
+    background-color: #6028D9;
+}
+
+/*ROOM CARD*/
+.room-card {
+    background-color: #17BEBB;
+}
+
+.room-card .service-image {
+    background-color: #2DD4BF;
+}
+
+.room-card .explore-btn {
+    background-color: #0EA5A4;
+}
+
+/*DRIVER CARD*/
+.driver-card {
+    background-color: #2388F5;
+}
+
+.driver-card .service-image {
+    background-color: #60A5FA;
+}
+
+.driver-card .explore-btn {
+    background-color: #1D4ED8;
+}
+
+.service-image {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+}
+
+.service-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.service-content {
+    padding: 25px;
+}
+
+.service-content h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.service-content p {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/*EXPLORE SERVICE BUTTON*/
+.explore-btn {
+    display: inline-block;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    margin: 0 auto;
+}
+
+.explore-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}
+
+.info {
+    text-align: center;          
+}
+
+.info ul {
+    list-style: none;            
+    padding: 0;
+    max-width: 700px;            
+    margin: 0 auto;             
+}
+
+.info li {
+    margin-bottom: 24px;         
+}
+
+.info li strong,.info li span {
+    display: block;              
+}
+
+/* colours used by the footer */
+:root {
+    --nav-bg: #001F3C;
+    --nav-text: #FFFFFF;
+    --nav-muted: #A0AEC0;
+}
+
+/* ----- Footer ----- */
+.site-footer {
+    background: var(--nav-bg);
+    color: var(--nav-text);
+    text-align: center;
+    padding: 24px 20px;
+    font-style: italic;
+}
+
+.footer-small { 
+    color: var(--nav-muted); 
+    font-size: 0.8rem; 
+    font-style: normal; 
+    margin-top: 6px; 
+}
+
+/* Navigation on small screens */
+@media (max-width: 760px) {
+    .site-nav { flex-direction: column; gap: 10px; padding: 12px 16px; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+}
+
+/* ----- Home banner (big photo at the top, like the video) ----- */
+.home-banner {
+    min-height: 70vh;
+    padding: 60px 6%;
+
+    display: flex;
+    align-items: center;
+
+    background-image:
+        linear-gradient(90deg, rgba(0, 21, 43, 0.85) 0%, rgba(0, 21, 43, 0.35) 70%),
+        url("../Accomodations/Accomodation.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-text {
+    max-width: 560px;
+}
+
+.banner-text h1 {
+    text-align: left;
+    font-size: 52px;
+    line-height: 1.15;
+    margin-bottom: 18px;
+}
+
+.banner-text p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #E2E8F0;
+}
+
+.banner-btn {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 30px;
+
+    background-color: #6D28D9;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+
+    transition: 0.3s;
+}
+
+.banner-btn:hover {
+    background-color: #A855F7;
+}
+
+@media (max-width: 760px) {
+    .home-banner { min-height: 55vh; text-align: center; justify-content: center; }
+    .banner-text h1 { text-align: center; font-size: 36px; }
+}
+
+/* ----- Your recent reservations (logged in users) ----- */
+.recent-bookings {
+    width: 95%;
+    max-width: 1100px;
+    margin: 40px auto 0;
+    text-align: center;
+}
+
+.recent-bookings h2 {
+    margin-bottom: 18px;
+}
+
+.recent-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.recent-card {
+    background: #0D1F5C;
+    border-left: 5px solid #17BEBB;
+    border-radius: 10px;
+    padding: 16px 20px;
+    width: 280px;
+    text-align: left;
+}
+
+.recent-card h3 {
+    text-align: left;
+    font-size: 18px;
+    margin: 4px 0 6px;
+}
+
+.recent-card p {
+    color: #CBD5E1;
+    font-size: 14px;
+}
+
+.recent-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #17BEBB;
+    font-weight: 600;
+}
+
+.recent-status {
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.recent-empty {
+    color: #A0AEC0;
+}
+
+.recent-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: #A855F7;
+    font-weight: 600;
+    text-decoration: none;
+}
