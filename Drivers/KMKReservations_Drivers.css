@@ -54,7 +54,7 @@ body {
     border-bottom-color: #2388F5;
 }
 
-/* headings */
+/* headings use Oswald, reference youtube video */
 h1, h2, h3 {
     font-family: "Oswald", Arial, sans-serif;
     letter-spacing: 0.5px;
@@ -340,7 +340,7 @@ h1, h2, h3 {
     background: #EFF6FF;
 }
 
-/* Date and time side by side */
+/* Date and time sbeside each other */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -351,7 +351,7 @@ h1, h2, h3 {
     display: none;
 }
 
-/* Single / Return */
+/* Single or Return */
 .trip-type {
     display: flex;
     gap: 24px;

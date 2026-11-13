@@ -14,7 +14,7 @@ body {
     color: #FFFFFF;
 }
 
-/*Navigation Bar (same as the My Profile page)*/
+/*Navigation Bar */
 .site-nav {
     background: #0D1F5C;
     display: flex;
@@ -54,7 +54,7 @@ body {
     border-bottom-color: #2388F5;
 }
 
-/* headings use Oswald, like the video */
+/* headings use Oswald, reference youtube video */
 h1, h2, h3 {
     font-family: "Oswald", Arial, sans-serif;
     letter-spacing: 0.5px;
@@ -214,7 +214,7 @@ h1, h2, h3 {
     --nav-muted: #A0AEC0;
 }
 
-/* ----- Footer ----- */
+/* Footer */
 .site-footer {
     background: var(--nav-bg);
     color: var(--nav-text);
@@ -236,7 +236,7 @@ h1, h2, h3 {
     .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
 }
 
-/* ----- Extra styling (inspired by the hotel booking video) ----- */
+/* Extra styling (inspired by the hotel booking video) */
 .hero-content h1 {
     font-size: 52px;
     line-height: 1.15;
@@ -247,7 +247,7 @@ h1, h2, h3 {
     font-size: 17px;
 }
 
-/* coloured line on top of the form (colour from the README) */
+/* coloured line on top of the form */
 .reserve-panel {
     border-top: 6px solid #A855F7;
 }
@@ -263,7 +263,7 @@ h1, h2, h3 {
     color: #FFFFFF;
 }
 
-/* Small screens: put the form under the heading so the page fits the phone */
+/* Small screens made suitable for phones */
 @media screen and (max-width: 900px) {
 
     .restaurants-hero {

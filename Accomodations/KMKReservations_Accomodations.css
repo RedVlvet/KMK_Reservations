@@ -56,7 +56,7 @@ body {
     border-bottom-color: #2388F5;
 }
 
-/* headings use Oswald, like the video */
+/* headings use Oswald */
 h1, h2, h3 {
     font-family: "Oswald", Arial, sans-serif;
     letter-spacing: 0.5px;
@@ -346,9 +346,7 @@ h1, h2, h3 {
 }
 
 
-/* =========================
-   Responsive Design
-========================= */
+/* Responsive Design */
 
 @media screen and (max-width: 900px) {
 
@@ -413,7 +411,7 @@ h1, h2, h3 {
     .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
 }
 
-/* ----- Extra styling (inspired by the hotel booking video) ----- */
+/* Extra styling (inspired by the hotel booking video)  */
 .hero-content h1 {
     font-size: 52px;
     line-height: 1.15;
@@ -424,12 +422,12 @@ h1, h2, h3 {
     font-size: 17px;
 }
 
-/* coloured line on top of the form (colour from the README) */
+/* coloured line on top of the form  */
 .booking-panel {
     border-top: 6px solid #2DD4BF;
 }
 
-/* button colours from the README */
+/* button colours */
 .booking-btn {
     background-color: #0EA5A4;
     color: #FFFFFF;

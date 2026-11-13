@@ -7,14 +7,14 @@
     $basepath = dirname(__DIR__);
     $base = str_replace('\\','/',$basepath);
 
-    // ?? (null coalescing operator): use $_POST if it is set, if not use $_GET, if not use ''
+    // ternary operator uses $_POST if it is set, if not use $_GET, if not use ''
     $driver = $_POST['driver'] ?? $_GET['driver'] ?? '';
     $time = $_POST['time'] ?? $_GET['time'] ?? '';
     $date = $_POST['date'] ?? '';
     $adults = $_POST['adults'] ?? '1';
     $children = $_POST['children'] ?? '0';
 
-    // Trip details (like the Knutsford Express booking form)
+    // Trip details (with reference to Knutsford Express' booking form)
     $from       = $_POST['from'] ?? '';
     $to         = $_POST['to'] ?? '';
     $tripType   = $_POST['trip_type'] ?? 'single';
@@ -108,7 +108,7 @@
         <link rel="stylesheet" href="KMKReservations_Drivers.css">
         <link rel ="stylesheet" href="../Shared/MessagePopUps.css">
     </head>
-    <!-- data-done tells the JavaScript to show the "Booking Confirmed" pop-up -->
+    <!-- Shows the "Booking Confirmed" pop-up -messsage -->
     <body data-done="<?php echo $done ? '1' : '0'; ?>">
          <!-- Navigation Bar -->
         <header class="site-nav">
@@ -117,7 +117,7 @@
             </a>
             <nav class="nav-links">
                 <a href="../Home/KMKReservations_Home.php">Home</a>
-                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
                 <a href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
                 <a class="active" href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
                 <a href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -142,6 +142,7 @@
             <section class="reserve-panel" id="reserve-panel">
                 <!-- Form heading with a car icon (similar to what's Knutsford Express) -->
                 <h2 class="trip-heading">
+                    <!-- Scalable Vector Graphics used to draw the car seen in the form -->
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M5 17h14M3 13l2-6h14l2 6v4H3z"/>
                         <circle cx="7.5" cy="17" r="1.5"/>
@@ -155,7 +156,7 @@
                     <p class="alert-error"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
 
-                <!--The data allows the same JavaScript to work with restaurant and driver bookings.-->
+                <!--The data allows the same JavaScript to work with accomodations, restaurant and driver bookings.-->
                 <form
                     id="bookingForm"
                     action=""
@@ -165,7 +166,7 @@
                     data-profile-url="../MyProfile/KMKReservations_MyProfile.php"
                 >
 
-                    <!-- Hidden field identifies the service -->
+                    <!-- Used to identify the service -->
                     <input type="hidden" name="service" value="drivers">
 
                     <!-- Name of the Drivers -->
@@ -203,11 +204,11 @@
                             </select>
                         </div>
 
-                        <!-- Swaps the from and to places -->
+                        <!-- Swaps the from and to location -->
                         <button type="button" class="swap-btn" id="swapBtn" aria-label="Swap travelling from and to">&#8645;</button>
                     </div>
 
-                    <!-- Date and Time of the Journey (side by side) -->
+                    <!-- Date and Time of the Journey beside each oher -->
                     <div class="form-row">
                         <div class="form-group">
                             <label for="date"> Journey Date: </label>
@@ -226,7 +227,7 @@
                         <label><input type="radio" name="trip_type" value="return" <?= $tripType === 'return' ? 'checked' : '' ?>> Return</label>
                     </div>
 
-                    <!-- Return Date and Time (only shown for a Return trip) -->
+                    <!-- Return Date and Time -->
                     <div class="form-row" id="returnRow" <?= $tripType === 'return' ? '' : 'hidden' ?>>
                         <div class="form-group">
                             <label for="return_date"> Return Date: </label>
@@ -239,7 +240,7 @@
                         </div>
                     </div>
 
-                    <!-- Passengers: click to choose (like Knutsford Express) -->
+                    <!-- Where passengers can click to choose (referece to Knutsford Express) -->
                     <button type="button" class="passenger-btn" id="passengerBtn" aria-expanded="false">
                         <span class="passenger-label">Passengers</span>
                         <span id="passengerSummary">1 Adult, No Children</span>
@@ -279,8 +280,7 @@
                     </button>
                 </form>
             </section>
-        </main>            
-       
+        </main>     
         
 
         <!-- Pop-up message box (used by MessagePopUps.js) -->

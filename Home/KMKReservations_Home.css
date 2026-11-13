@@ -14,7 +14,7 @@ body {
     color: #FFFFFF;
 }
 
-/*Navigation Bar (same as the My Profile page)*/
+/*Navigation Bar */
 .site-nav {
     background: #0D1F5C;
     display: flex;
@@ -61,7 +61,7 @@ h1, h2, h3 {
 }
 
 /* headings */
-h1, h2, h3 {
+h1, h2, h3 {    
     color: #FFFFFF;
     text-align: center;
 }
@@ -263,7 +263,7 @@ h1, h2, h3 {
     --nav-muted: #A0AEC0;
 }
 
-/* ----- Footer ----- */
+/* Footer */
 .site-footer {
     background: var(--nav-bg);
     color: var(--nav-text);
@@ -285,7 +285,7 @@ h1, h2, h3 {
     .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
 }
 
-/* ----- Home banner (big photo at the top, like the video) ----- */
+/* Home banner (reference to the youube video) */
 .home-banner {
     min-height: 70vh;
     padding: 60px 6%;
@@ -340,7 +340,7 @@ h1, h2, h3 {
     .banner-text h1 { text-align: center; font-size: 36px; }
 }
 
-/* ----- Your recent reservations (logged in users) ----- */
+/* Shows recent reservations made by the user */
 .recent-bookings {
     width: 95%;
     max-width: 1100px;

@@ -1,37 +1,37 @@
 <?php
-    // ADMIN PAGE
-    // Only admins can open this page. It shows every booking, a summary,
-    // a search / filter, and lets the admin confirm or cancel bookings.
+    // Administrators are the only ones able to access this page
+    // They are able to see all bookings and get a summary of all reservations made
+    
     session_start();
 
     // Database connection and shared functions
     require_once '../Database/DB.php';
     require_once '../Shared/KMKReservations_Functions.php';
 
-    // The role is checked in PHP (hiding the link is not enough)
+    // The role is checked in PHP
     requireAdmin();
 
-    // 1. Confirm or cancel a booking 
+    //Confirm or cancel a reservation
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bookingId = (int) ($_POST['booking_id'] ?? 0);
         $newStatus = $_POST['new_status'] ?? '';
 
-        // Only these two changes are allowed
         if (in_array($newStatus, ['Confirmed', 'Cancelled'])) {
             runQuery($conn, "UPDATE bookings SET status = ? WHERE booking_id = ?", "si", [$newStatus, $bookingId]);
             $_SESSION['admin_message'] = 'Booking updated to ' . $newStatus . '.';
         }
 
-        // Go back to the same page with the same filters (so refreshing doesn't send the form again)
+        // Goes back to the Admin page using the same filters without redoing the form
         header("Location: KMKReservations_Admin.php?" . http_build_query(getBookingFilters()));
         exit;
     }
 
-    // Message from the last confirm / cancel (shown once)
+    // Shows the last message which was either confirmed or cancelled
     $message = $_SESSION['admin_message'] ?? '';
     unset($_SESSION['admin_message']);
 
-    //  2. Summary numbers 
+    //Shows the number of reservations made 
+    // Shows reservations that could be confirmed, cancelled or pending.
     $today = date('Y-m-d');
     $summary = getOneRow($conn,
         "SELECT COUNT(*) AS total,
@@ -44,22 +44,23 @@
 
     $userCount = getOneRow($conn, "SELECT COUNT(*) AS total FROM users WHERE role = 'user'");
 
-    // Bookings for each service
+    // Shows booking for each service
     $perService = ['restaurant' => 0, 'room' => 0, 'driver' => 0];
     $serviceRows = getAllRows($conn,
         "SELECT s.service_type, COUNT(*) AS total
          FROM bookings b JOIN services s ON b.service_id = s.service_id
-         WHERE b.status <> 'Cancelled' // <> means not equal in SQL
+         // <> means not equal in SQL
+         WHERE b.status <> 'Cancelled' 
          GROUP BY s.service_type");
     foreach ($serviceRows as $row) {
         $perService[$row['service_type']] = $row['total'];
     }
 
-    // 3. Search / filter 
+    // Filter 
     $filters  = getBookingFilters();
     $bookings = getFilteredBookings($conn, $filters);
 
-    // Link for the CSV download, with the same filters as the table
+    //Allows the CSV file to be downloaded based on the filter used in the table
     $csvLink = 'export_csv.php?' . http_build_query($filters);
 ?>
 
@@ -80,7 +81,7 @@
         </a>
         <nav class="nav-links">
             <a href="../Home/KMKReservations_Home.php">Home</a>
-            <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+            <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
             <a href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
             <a href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
             <a href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -126,7 +127,7 @@
         </section>
 
         <p class="per-service">
-            Active bookings &mdash;
+            Active bookings &mdash;  
             Restaurants: <strong><?= $perService['restaurant'] ?></strong> &nbsp;|&nbsp;
             Accommodations: <strong><?= $perService['room'] ?></strong> &nbsp;|&nbsp;
             Drivers: <strong><?= $perService['driver'] ?></strong>
@@ -177,7 +178,7 @@
             </div>
         </form>
 
-        <!-- All bookings -->
+        <!-- All bookings shown in a table -->
         <section class="table-box">
             <p class="result-count"><?= count($bookings) ?> booking(s) found</p>
 

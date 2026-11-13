@@ -7,8 +7,8 @@
     require_once '../Database/DB.php';
     require_once '../Shared/KMKReservations_Functions.php';
 
-    $errors  = [];   // list of error messages to show
-    $message = '';   // success message to show
+    $errors  = [];   // Shows a list of error messages
+    $message = '';   // Shows that the activity caried out was successful
 
     // Values kept in the forms if there is an error
     $loginEmail  = '';
@@ -16,14 +16,14 @@
     $signupEmail = '';
     $signupPhone = '';
 
-    // Details of the logged in user (from the session for now)
+    // Details of the logged in user 
     $fullName = $_SESSION['user_name']  ?? '';
     $email    = $_SESSION['user_email'] ?? '';
     $phone    = $_SESSION['user_phone'] ?? '';
 
-    // Logs the user in: saves who they are in the session, then goes to the right page
+    //Saves the user's log in details, in the session then redirects them to whichever service they want
     function logUserIn($user, $newAccount = false) {
-        session_regenerate_id(true);   // new session id after log in, so the old one can't be reused
+        session_regenerate_id(true);   // new session id after the user logs in, which means the old session cannot be used
 
         $_SESSION['user_id']       = $user['user_id'];
         $_SESSION['user_name']     = $user['full_name'];
@@ -44,10 +44,9 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Each form has a hidden "action" field so we know which one was sent
+        // Action tells which event is happening
         $action = $_POST['action'] ?? '';
-
-        // 1. LOG IN 
+        
         if ($action === 'login') {
             $loginEmail = trim($_POST['email'] ?? '');
             $password   = $_POST['password'] ?? '';
@@ -69,8 +68,7 @@
                 }
             }
         }
-
-        // 2. CREATE ACCOUNT 
+         
         if ($action === 'signup') {
             $signupName  = trim($_POST['name'] ?? '');
             $signupEmail = trim($_POST['email'] ?? '');
@@ -112,8 +110,7 @@
             }
         }
 
-
-        // 3. UPDATE PERSONAL DETAILS (logged in users only) 
+        //Where users can update their personal details 
         if ($action === 'update' && $isLoggedIn) {
             $fullName    = trim($_POST['name'] ?? '');
             $email       = trim($_POST['email'] ?? '');
@@ -137,22 +134,23 @@
 
             // The new email can't belong to someone else
             if (count($errors) == 0 && getOneRow($conn, "SELECT user_id FROM users WHERE email = ? AND user_id <> ?",
-                                                 "si", [$email, $_SESSION['user_id']])) {
+                //si where s stands for (string) and i stands for (integer) 
+                "si", [$email, $_SESSION['user_id']])) {
                 $errors[] = 'This email is already used by another account.';
             }
 
             if (count($errors) == 0) {
-                // Save the new details in the users table
+                //New details will be saved in the users table
                 runQuery($conn, "UPDATE users SET full_name = ?, email = ?, phone = ? WHERE user_id = ?",
                          "sssi", [$fullName, $email, $phone, $_SESSION['user_id']]);
 
-                // Only change the password if a new one was typed
+                //Password only changed if a new one was created
                 if ($newPassword != '') {
                     runQuery($conn, "UPDATE users SET password = ? WHERE user_id = ?",
                              "si", [password_hash($newPassword, PASSWORD_DEFAULT), $_SESSION['user_id']]);
                 }
 
-                // Keep the new details in the session so the page shows them
+                // Shows details entered by the user in a session
                 $_SESSION['user_name']  = $fullName;
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_phone'] = $phone;
@@ -174,13 +172,14 @@
     </head>
     <body>
 
+    <!-- Navigation Bar -->
     <header class="site-nav">
         <a href="../Home/KMKReservations_Home.php" class="nav-brand">
             <img src="../KMKReservations_Logo.png" alt="KMK Reservations logo">
         </a>
         <nav class="nav-links">
             <a href="../Home/KMKReservations_Home.php">Home</a>
-            <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+            <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
             <a href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
             <a href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
             <a href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -204,7 +203,7 @@
 
     <?php if (!$isLoggedIn): ?>
 
-        <!--Not logged in: Log in and Create account-->
+        <!--Where the user can either Log in or Create an account-->
         <section class="form-card">
             <h2>Log in</h2>
 
@@ -278,7 +277,7 @@
 
     <?php else: ?>
 
-        <!-- Logged in: profile and personal details -->
+        <!-- once logged in, the page shows profile and personal details -->
         <aside class="profile-card">
             <div class="avatar"><?= htmlspecialchars(strtoupper(substr($_SESSION['user_name'] ?? 'U', 0, 1))) ?></div>
             <h2><?= htmlspecialchars($_SESSION['user_name'] ?? '') ?></h2>
@@ -342,17 +341,11 @@
     <?php endif; ?>
 
     </main>
-
-
         <!-- Pop-up message box -->
         <div id="bookingModal" class="modal-overlay">
             <div class="modal-box">
-                <button
-                    type="button"
-                    id="modalClose"
-                    class="close-btn"
-                    aria-label="Close pop-up">
-                    &times;
+                <button type="button" id="modalClose" class="close-btn" aria-label="Close pop-up"> 
+                    &times; 
                 </button>
 
                 <div id="modalIcon" class="modal-icon">
@@ -368,25 +361,18 @@
                 </p>
 
                 <div class="modal-actions">
-
-                    <button
-                        type="button"
-                        id="modalPrimary"
-                        class="modal-button">
+                    <button type="button" id="modalPrimary" class="modal-button">
                         Continue
                     </button>
 
-                    <button
-                        type="button"
-                        id="modalSecondary"
-                        class="modal-button secondary">
+                    <button type="button" id="modalSecondary" class="modal-button secondary">
                         Cancel
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Link the JavaScript file -->
+        <!-- links to the JavaScript file -->
         <script src="../Shared/MessagePopUps.js"></script>
         <script src ="../MyProfile/KMKReservations_MyProfile.js"></script>
 

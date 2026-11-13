@@ -19,7 +19,7 @@ body {
     min-height: 100vh;
 }
 
-/*Navigation Bar (same as the My Profile page)*/
+/*Navigation Bar*/
 .site-nav {
     background: #0D1F5C;
     display: flex;
@@ -124,15 +124,15 @@ h1, h2, h3 {
 
 /* Individual Service Colours */
 .restaurant {
-    background-color: #17BEBB;
-}
-
-.room {
     background-color: #6D28D9;
 }
 
+.room {
+    background-color:#17BEBB;
+}
+
 .driver {
-    background-color: #001F3C;
+    background-color: #60A5FA;
 }
 
 /* Highlight the selected service */

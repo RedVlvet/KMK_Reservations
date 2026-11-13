@@ -5,7 +5,7 @@
     //     require_once '../Shared/KMKReservations_Functions.php';
 
 
-    // ---------- 1. Database helpers (prepared statements) ----------
+    // Database helpers (prepared statements) 
 
     // Runs a query with ? marks in it. $types is like "ssi" (s = text, i = number)
     // Returns the statement, or false if something went wrong

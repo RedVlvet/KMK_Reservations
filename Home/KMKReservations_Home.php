@@ -41,7 +41,7 @@
                 </a>
                 <nav class="nav-links">
                     <a class="active" href="../Home/KMKReservations_Home.php">Home</a>
-                    <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+                    <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
                     <a href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
                     <a href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
                     <a href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -56,16 +56,13 @@
             <!-- Main Home Section -->
             <main class="home-hero">
 
-                <!-- Big banner with a photo (inspired by the hotel booking video) -->
-
+                
                 <section class="home-banner">
 
                     <div class="banner-text">
 
                         <h1>Your plans, perfectly reserved.</h1>
-
                         <p>Book restaurants, rooms and drivers all in one place.</p>
-
                         <p>Fast, easy and reliable across Jamaica.</p>
 
                         <a href="#services" class="banner-btn">Discover now</a>
@@ -74,7 +71,7 @@
 
                 </section>
 
-                <!-- Your recent reservations (only shown when logged in) -->
+                <!-- Shows recent reservations made by the user -->
                 <?php if ($isLoggedIn): ?>
                 <section class="recent-bookings">
                     <h2>Your recent reservations</h2>

@@ -1,13 +1,13 @@
 <?php
-    // Start the session and checks the user is logged in.
+    // Start the session and checks if the user is logged in.
     session_start();
     $isLoggedIn = isset($_SESSION['user_id']);
      
-    //get the file name of the website
+    //gets the file name of the website
     $basepath = dirname(__DIR__);
     $base = str_replace('\\','/',$basepath);
 
-    // ?? (null coalescing operator): use $_POST if it is set, if not use $_GET, if not use ''
+    // ternary operator uses $_POST if it is set, if not use $_GET, if not use ''
     $accomodation = $_POST['accomodation'] ?? $_GET['accomodation'] ?? '';
     $checkin  = $_POST['checkin'] ?? '';
     $checkout = $_POST['checkout'] ?? '';
@@ -50,7 +50,8 @@
                 $error = 'Sorry, your booking could not be saved. Please try again.';
             } else {
                 $done = true;
-                // Clear the form after a successful booking
+
+                // Clears the form after a successful booking
                 $accomodation = $checkin = $checkout = '';
                 $adults = '1';
                 $children = '0';
@@ -70,8 +71,9 @@
         <link rel ="stylesheet" href="../Shared/MessagePopUps.css">
     </head>
 
-    <!-- data-done tells the JavaScript to show the "Booking Confirmed" pop-up -->
+    <!-- Shows the "Booking Confirmed" pop-up message-->
     <body data-done="<?php echo $done ? '1' : '0'; ?>">
+
         <!-- Navigation Bar -->
         <header class="site-nav">
             <a href="../Home/KMKReservations_Home.php" class="nav-brand">
@@ -79,7 +81,7 @@
             </a>
             <nav class="nav-links">
                 <a href="../Home/KMKReservations_Home.php">Home</a>
-                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
                 <a class="active" href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
                 <a href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
                 <a href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -100,7 +102,6 @@
                 <p>Find and reserve a comfortable room for your stay.</p>
             </section>
 
-
             <!-- Right Side of the Booking Form -->
             <section class="booking-panel" id="booking-panel">
                 <h2>Book Your Room</h2>
@@ -110,7 +111,6 @@
                     <p class="alert-error"><?= htmlspecialchars($error) ?></p>
                 <?php endif; ?>
 
-                <!-- JavaScript to work with restaurant and driver reservatons/bookings -->
                 <form
                     id="bookingForm"
                     action=""
@@ -120,7 +120,7 @@
                     data-profile-url="../MyProfile/KMKReservations_MyProfile.php"
                 >
 
-                    <!-- used to identifies the service -->
+                    <!-- used to identify the service -->
                     <input type="hidden" name="service" value="rooms">
 
                     <!-- List of Accomodations-->

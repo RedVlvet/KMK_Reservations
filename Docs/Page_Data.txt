@@ -1,26 +1,22 @@
-// what data will be collected in each website or displayed
 
-home/index
--Display: Info about KMKreservations, small over view of the services we offer
+Home
+-Display: Info about KMK Reservations, small over view of the services we offer
 - If the user is logged in display previous bookings
 
 Restaurants
-- Display: restaurant Info(Name, Location)
-- Collect: (Customer ID, Customer Name, Restaurant Name, Restaurant location, selected driver and date/time of the lunch )
+- Display: restaurant Info(Name, Location), Reservation Date and time, Number of Adults and/or children
+- Collects same as mentioned in what will be displayed
 
-Accomodation
-- Display: Room Type, Location, Occpuancy Status, Room Size, Room Cost, Room rating from customers
-- Collect: Customer ID, Customer name, Room information, update room Occupancy status
-- Add cost to bill, Duration of stay 
+Accommodations
+- Display: Accommodations, Check - In, Check- Out, Adults, Children and Number of rooms
+- Collects same as mentioned in what will be displayed
 
 Drivers
-- Display (Driver Name, Location Speciality,Driver rating, Cost of Drive/Per mile rate, Type of car)
-- Collect CustomerID, CustomerName, Driver ID, DriverName, Add cost to bill
+- Display (Driver Name, Location, Journey Date, Time, Single or Return Trip, Passengers)
+- Collects same as mention in what will be displayed
 
 Bookings
-- When the customer selects what they want from the other tabs display a reservation overview 
-- that when clicked on gives on show what the customer has requested and the total cost of it all.
-- When the duration of stay is up prompt them asking if they would like the extend it or finialise bookings
-- When Bookings are up a displaybill button should display on the bookings tab a bill with a small breakdown of the total
-
+- When the user selects a service that they have booked/reserved,
+- it shows where they can click either of the three services to look at their previous or current reservaions.
+- Where when looking at the current reservation tab the user can cancel their reservation.
 

@@ -12,7 +12,7 @@
     //Uses the name of the user currently logged in
     $userName = $_SESSION['user_name'] ?? 'User';
 
-    // An array that stores all reservation made
+    // An array that stores all reservations made
     $reservations =
     ["restaurant" => [],
     "room" => [],
@@ -25,8 +25,8 @@
 
         // Cancel a booking (the booking is not deleted, its status becomes "Cancelled")
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_id'])) {
-            // "AND user_id = ?" makes sure users can only cancel their OWN bookings
-            // and only upcoming ones (a booking in the past can't be cancelled)
+            // "AND user_id = ?" makes sure users can only cancel their own bookings
+            // and only upcoming bookings (NB. Bookings from the past cannot be cancelled)
             $stmt = runQuery($conn,
                 "UPDATE bookings SET status = 'Cancelled'
                  WHERE booking_id = ? AND user_id = ? AND status <> 'Cancelled'
@@ -47,19 +47,20 @@
              ORDER BY b.booking_date, b.booking_time",
             "i", [$_SESSION['user_id']]);
 
-        // Put each booking in the right group (restaurant, room or driver)
+        //Places each booking in service groups/type (Restaurants, Accomodations, Drivers)
         foreach ($rows as $row) {
             $reservations[$row['service_type']][] = [
-                'id'        => $row['booking_id'],
-                'name'      => $row['service_name'] . ' - ' . $row['location'],
-                'date'      => $row['booking_date'],
-                'time'      => $row['booking_time'] ? substr($row['booking_time'], 0, 5) : 'Check-in day',
-                'details'   => bookingDetails($row),
+                'id'  => $row['booking_id'],
+                'name' => $row['service_name'] . ' - ' . $row['location'],
+                'date' => $row['booking_date'],
+                'time' => $row['booking_time'] ? substr($row['booking_time'], 0, 5) : 'Check-in day',
+                'details' => bookingDetails($row),
                 'reference' => $row['reference'],
-                'made_on'   => $row['created_at'],          // the date the reservation was made
+                'made_on' => $row['created_at'],          // the date the reservation was made
                 'booking_status' => $row['status'],         // Pending, Confirmed or Cancelled
-                // Cancelled bookings go under "Previous"
-                'status'    => $row['status'] === 'Cancelled' ? 'previous' : bookingPeriod($row)
+
+                // Cancelled bookings will be placed under "Previous"
+                'status'=> $row['status'] === 'Cancelled' ? 'previous' : bookingPeriod($row)
             ];
         }
     }
@@ -81,7 +82,7 @@
             </a>
             <nav class="nav-links">
                 <a href="../Home/KMKReservations_Home.php">Home</a>
-                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurant</a>
+                <a href="../Restaurants/KMKReservations_Restaurants.php">Restaurants</a>
                 <a href="../Accomodations/KMKReservations_Accomodations.php">Accommodations</a>
                 <a href="../Drivers/KMKReservations_Drivers.php">Drivers</a>
                 <a class="active" href="../MyBookings/KMKReservations_MyBookings.php">My Bookings</a>
@@ -103,14 +104,14 @@
                     Where you can view in one place.
                 </p>
 
-                <!-- Shown when nobody is logged in -->
+                <!-- When nobody logs in -->                
                 <?php if (!$isLoggedIn): ?>
                     <p class="login-note">
                         Please <a href="../MyProfile/KMKReservations_MyProfile.php">log in</a> to see your reservations.
                     </p>
                 <?php endif; ?>
 
-                <!-- Message after cancelling -->
+                <!-- Cancellation Message -->
                 <?php if ($message != ''): ?>
                     <p class="booking-message"><?php echo htmlspecialchars($message); ?></p>
                 <?php endif; ?>
@@ -153,7 +154,7 @@
 
                 <!-- Reservation Cards -->
                 <div class = "reservation-list">
-                    <!-- Loop through each service, then each reservation in that service -->
+                    <!-- Loops through each service, then goes through each reservation in that service -->
                     <?php foreach ($reservations as $service => $serviceReservations): ?>
                     <?php foreach ($serviceReservations as $reservation): ?>
                         <div class = "reservation-card"
@@ -189,12 +190,12 @@
                             <?php echo htmlspecialchars($reservation['made_on']); ?>
                         </p>
                         
-                        <!-- Display the reservation status (Pending, Confirmed or Cancelled) -->
+                        <!-- Reservation Status (Pending, Confirmed or Cancelled) -->
                         <span class = "status status-<?php echo strtolower($reservation['booking_status']); ?>"> 
                             <?php echo htmlspecialchars($reservation['booking_status']); ?>
                         </span>
 
-                        <!-- Cancel button (only for current bookings that are not cancelled) -->
+                        <!-- Cancel button (used for current bookings that has not been cancelled as yet) -->
                         <?php if ($reservation['status'] === 'current' && $reservation['booking_status'] !== 'Cancelled'): ?>
                             <form method="post" action="" class="cancel-form"
                                   onsubmit="return confirm('Cancel reservation <?php echo htmlspecialchars($reservation['reference']); ?>?');">
@@ -208,7 +209,7 @@
                     <?php endforeach; ?>
                     <?php endforeach; ?>
 
-                    <!-- Message displaying that there are no reservations --> 
+                    <!-- "No Reservation Pop-Up Message --> 
                     <div id = "noReservations"> 
                         <h3> No Reservations Found </h3>
                         <p> 
